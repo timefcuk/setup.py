@@ -1,0 +1,39 @@
+---
+jobs:
+  - name: build
+    public: true
+    serial: true
+    plan:
+      - get: repo
+        trigger: ((trigger_status))
+        resource: repository/lib
+      - task: run setup.sh
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: python
+          inputs:
+            - name: repo
+          run:
+            path: ssh-agent
+            args:
+              - "bash"
+              - "setup.sh"
+            dir: "repo/lib"
+          params:
+            BUMP_TYPE: ((job_type))
+            GITHUB_SSH_CREDENTIALS: ((github_ssh_credentials_base64))
+            PYPI_REPO_CONFIG: ((pypi_repo_config_base64))
+
+resources:
+  - name: repository/lib
+    type: git
+    source:
+      uri: "git@github.com:timefcuk/setup.py.git"
+      branch: ((ci_branch))
+      paths:
+        - lib/**
+      fetch_tags: True
+      private_key: ((github_ssh_private_key))

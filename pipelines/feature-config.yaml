@@ -1,0 +1,5 @@
+---
+trigger_status: true
+job_type: feature
+# branch has to be specified in the command
+# ci_branch: fb-

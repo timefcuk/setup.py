@@ -1,0 +1,4 @@
+---
+trigger_status: false
+job_type: release
+ci_branch: master
