@@ -1,10 +1,12 @@
 # Pipeline doc
 
 ## Preparations
+### Prepare fly utility to reach Concourse
 ```
 fly --target demo login --concourse-url http://127.0.0.1:8080 -u test -p test
 fly --target demo sync
 ```
+### Prepare secret file
 
 ## Master pipeline
 ```

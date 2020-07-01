@@ -1,4 +1,4 @@
 ---
-trigger_status: false
+trigger_status: true
 job_type: master
 ci_branch: master
